@@ -61,7 +61,9 @@
     Tweet *tweet = self.tweets[indexPath.row];
     cell.nameLabel.text = tweet.user.name; //username
     cell.handleLabel.text = tweet.user.screenName; //handle
-    
+    cell.tweetLabel.text = tweet.text; //tweet content
+
+    //Access image
     NSString *fullProfileImageURLString = tweet.user.profileImage;
     NSURL *profileImageURL = [NSURL URLWithString:fullProfileImageURLString];
     cell.profileImage.image = nil;
