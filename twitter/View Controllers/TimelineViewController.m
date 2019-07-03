@@ -19,6 +19,7 @@
 
 //Adding the property called tweet
 @property (nonatomic, strong) NSArray *tweets;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -30,22 +31,44 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    // Get timeline
+    [self getTimeline];
+
+    //Allocating the UIRefreshControl
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    
+    //Initializing a UIRefreshControl
+   // UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    
+    //Bind the action to the refresh control
+    [self.refreshControl addTarget:self action:@selector(getTimeline) forControlEvents:UIControlEventValueChanged];
+
+    
+    //Insert the refresh control into the list
+    [self.tableView addSubview:self.refreshControl];
+}
+/*
+ Function: getTimeline
+ Purpose: Makes a network request to get updated data, updates the tableView with the new data
+          hides the RefreshControl
+ */
+
+-(void)getTimeline{
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
-            self.tweets = tweets;
+            self.tweets = [NSArray arrayWithArray: tweets];
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             for (Tweet *array in tweets) {
                 NSString *text = array.text;
-                NSLog(@"%@", text);
+                NSLog(@"text we got %@", text);
             }
             //reload Data
             [self.tableView reloadData];
-
+            
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
             
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -59,10 +82,15 @@
     
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
-    cell.nameLabel.text = tweet.user.name; //username
+    cell.nameLabel.text = tweet.user.name;
+    //NSLog(tweet.user.name);//username
     cell.handleLabel.text = tweet.user.screenName; //handle
     cell.tweetLabel.text = tweet.text; //tweet content
-
+    
+    if (tweet.text.length == 0){
+        NSLog(@"empty text");
+    }
+    
     //Access image
     NSString *fullProfileImageURLString = tweet.user.profileImage;
     NSURL *profileImageURL = [NSURL URLWithString:fullProfileImageURLString];
@@ -76,6 +104,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
 }
+
+
 /*
 #pragma mark - Navigation
 
