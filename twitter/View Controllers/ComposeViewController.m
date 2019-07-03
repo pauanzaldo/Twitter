@@ -7,10 +7,12 @@
 //
 
 #import "ComposeViewController.h"
+#import "APIManager.h"
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *tweetButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *closeButton;
+@property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
 
 @end
 
@@ -18,13 +20,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
+    
 }
 
 // Action method for the close button
 - (IBAction)closeButtonTapped:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
+
+
+// Invoking the API method using the text in the UITextView 
+- (IBAction)tweetButtonTapped:(UIBarButtonItem *)sender {
+    [[APIManager shared] postStatusWithText:self.tweetTextView.text completion:^ (Tweet *tweet, NSError *error){
+        if(tweet){
+            [self.delegate didTweet:tweet];
+            NSLog(@"😎😎😎 Success!");
+            
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        [self dismissViewControllerAnimated:true completion:nil];
+    }];
+    
+}
+ 
+
 
 
 /*
