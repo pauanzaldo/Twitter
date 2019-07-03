@@ -17,7 +17,6 @@
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-//Adding the property called tweet
 @property (nonatomic, strong) NSArray *tweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -31,37 +30,34 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    [self getTimeline];
+    [self fetchTimeline];
 
-    //Allocating the UIRefreshControl
+    //Allocate the UIRefreshControl
     self.refreshControl = [[UIRefreshControl alloc] init];
     
-    //Initializing a UIRefreshControl
-   // UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    
     //Bind the action to the refresh control
-    [self.refreshControl addTarget:self action:@selector(getTimeline) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(fetchTimeline) forControlEvents:UIControlEventValueChanged];
 
-    
     //Insert the refresh control into the list
     [self.tableView addSubview:self.refreshControl];
 }
-/*
- Function: getTimeline
- Purpose: Makes a network request to get updated data, updates the tableView with the new data
-          hides the RefreshControl
- */
 
--(void)getTimeline{
+/*
+ Function: fetchTimeline
+ Purpose: Makes a API request, which then calls the completion to pass back the data.
+          Updates the tableView with the new data. Hides the RefreshControl.
+ */
+-(void)fetchTimeline{
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
+            //View controller stores the data passed into the completion handler
             self.tweets = [NSArray arrayWithArray: tweets];
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             for (Tweet *array in tweets) {
                 NSString *text = array.text;
                 NSLog(@"text we got %@", text);
             }
-            //reload Data
+            //reload table view, which will call numberOfRows and cellForRowAt
             [self.tableView reloadData];
             
         } else {
@@ -74,16 +70,14 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-//Access user information from tweet cell
+// Returns an instance of the custom cell with that reuse identifier with its elements
+// populated with data at the index asked for
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
-    cell.nameLabel.text = tweet.user.name;
-    //NSLog(tweet.user.name);//username
+    cell.nameLabel.text = tweet.user.name; //username 
     cell.handleLabel.text = tweet.user.screenName; //handle
     cell.tweetLabel.text = tweet.text; //tweet content
     
@@ -100,7 +94,7 @@
     
 }
 
-
+// Returns the number of items returned from the API
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
 }
@@ -117,4 +111,9 @@
 */
 
 
+- (IBAction)closeButton:(id)sender {
+}
+
+- (IBAction)tweetButton:(id)sender {
+}
 @end
