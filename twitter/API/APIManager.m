@@ -11,8 +11,8 @@
 #import "User.h"
 
 static NSString * const baseURLString = @"https://api.twitter.com";
-static NSString * const consumerKey = @"Rx9uMq8VPdrGmdz9frfs2EObA";// Enter your consumer key here
-static NSString * const consumerSecret = @"cPNixHr8hMdIwMhNips9q8WlJ674SpShEeDtEcOwtNgDCmpkex";// Enter your consumer secret here
+static NSString * const consumerKey = @"Rx9uMq8VPdrGmdz9frfs2EObA";// consumer key
+static NSString * const consumerSecret = @"cPNixHr8hMdIwMhNips9q8WlJ674SpShEeDtEcOwtNgDCmpkex";// consumer secret 
 
 @interface APIManager()
 
@@ -64,6 +64,20 @@ Replace the existing code so we get an array of Tweets rather than array of Dict
        completion(nil, error);
    }];
        
+}
+
+//Updates the authenticating user's current status, also known as Tweeting
+- (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{
+    
+    NSString *urlString = @"1.1/statuses/update.json";
+    NSDictionary *parameters = @{@"status": text};
+    
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
 }
 
 @end

@@ -10,5 +10,6 @@
 
 @interface TimelineViewController : UIViewController
 
+-(void)fetchTimeline;
 
 @end

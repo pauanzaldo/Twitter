@@ -111,9 +111,4 @@
 */
 
 
-- (IBAction)closeButton:(id)sender {
-}
-
-- (IBAction)tweetButton:(id)sender {
-}
 @end
