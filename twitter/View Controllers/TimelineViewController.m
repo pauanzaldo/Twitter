@@ -44,7 +44,10 @@
 
     //Insert the refresh control into the list
     [self.tableView addSubview:self.refreshControl];
+    
+
 }
+
 
 /*
  Function: fetchTimeline

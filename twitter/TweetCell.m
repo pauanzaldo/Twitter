@@ -12,7 +12,6 @@
 @implementation TweetCell
 
 
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
