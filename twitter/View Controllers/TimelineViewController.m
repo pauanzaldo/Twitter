@@ -93,6 +93,9 @@
     cell.favoriteLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
     
     cell.retweetLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
+    
+    cell.createdAt.text = tweet.createdAtString;
+
  
     if (tweet.text.length == 0){
         NSLog(@"empty text");
