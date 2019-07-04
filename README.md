@@ -1,6 +1,6 @@
 # Project 3 - *Twitter*
 
-**Twitter* is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
+**Twitter** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
 Time spent: **X** hours spent in total
 
@@ -53,7 +53,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/mMTxic8x3D.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
