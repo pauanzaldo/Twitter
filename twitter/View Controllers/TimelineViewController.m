@@ -7,6 +7,8 @@
 //
 
 #import "TimelineViewController.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
 #import "ComposeViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
@@ -79,10 +81,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
+    
+    cell.tweet = tweet;
     cell.nameLabel.text = tweet.user.name; //username 
     cell.handleLabel.text = tweet.user.screenName; //handle
     cell.tweetLabel.text = tweet.text; //tweet content
     
+    cell.favoriteLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
+    
+    cell.retweetLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
+ 
     if (tweet.text.length == 0){
         NSLog(@"empty text");
     }
@@ -101,8 +109,6 @@
     return self.tweets.count;
 }
 
-
-
 //Setting the TimelineViewController as the delegate of the ComposeViewController
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -111,13 +117,33 @@
     composeController.delegate = self;
 }
 
-
-
-//Adding the new tweet to the tweets array 
+// Adds the new tweet to the tweets array
+// New tweet should appear in the timeline
 - (void)didTweet:(Tweet *)tweet{
-    [self.tweets addObject:tweet];
+    [self.tweets insertObject:tweet atIndex:(0)];
     [self.tableView reloadData];
     
 }
+
+/*
+ Action: didLogout
+ Goal: User logs out of the app. After logout,
+ user is taken to login screen. Clears APIManager access tokens.
+ */
+
+
+- (IBAction)didLogout:(UIBarButtonItem *)sender {
+    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    
+    //Clear out the access tokens
+    [[APIManager shared] logout];
+    
+}
+
 
 @end

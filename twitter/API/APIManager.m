@@ -12,7 +12,7 @@
 
 static NSString * const baseURLString = @"https://api.twitter.com";
 static NSString * const consumerKey = @"Rx9uMq8VPdrGmdz9frfs2EObA";// consumer key
-static NSString * const consumerSecret = @"cPNixHr8hMdIwMhNips9q8WlJ674SpShEeDtEcOwtNgDCmpkex";// consumer secret 
+static NSString * const consumerSecret = @"cPNixHr8hMdIwMhNips9q8WlJ674SpShEeDtEcOwtNgDCmpkex";// consumer secret
 
 @interface APIManager()
 
@@ -72,6 +72,31 @@ Replace the existing code so we get an array of Tweets rather than array of Dict
     NSString *urlString = @"1.1/statuses/update.json";
     NSDictionary *parameters = @{@"status": text};
     
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+// Takes in the tweet to be favorited and then uses it’s id property to create the parameters dictionary.
+- (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
+    
+    NSString *urlString = @"1.1/favorites/create.json";
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+
+- (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
+    NSString *urlString = @"1.1/statuses/retweet/:id.json";
+    NSDictionary *parameters = @{@"id": tweet.idStr};
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
         completion(tweet, nil);

@@ -19,9 +19,7 @@
 @implementation ComposeViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-        // Do any additional setup after loading the view.
-    
+    [super viewDidLoad];    
 }
 
 // Action method for the close button
