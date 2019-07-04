@@ -9,6 +9,8 @@ target 'twitter' do
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
   pod 'TTTAttributedLabel'
+  pod 'DateTools'
+  
 
 end
 

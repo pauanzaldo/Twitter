@@ -24,8 +24,7 @@
 
 /*
  Action: didTapFavorite
- Purpose: Updates the local model (tweet) properties to reflect it’s
- been favorited by updating the favorited bool and incrementing the favoriteCount.
+ Purpose: Updates the local model (tweet) properties to reflect it’s been favorited by updating the favorited bool and incrementing the favoriteCount.
  */
 - (IBAction)didTapFavorite:(UIButton *)sender {
     
@@ -53,9 +52,13 @@
  
 }
 
-
+/*
+ Action: didTapRetweet
+ Purpose: Same functionality as didTapFavorite,
+        except that for retweet.
+ */
 - (IBAction)didTapRetweet:(UIButton *)sender {
-    //if Tweet is already favorited, unfavorite it
+    //if Tweet is already retweet, unretweet it
     if(self.tweet.retweeted){
         self.tweet.retweeted = NO;
         self.favoriteLabel.text = [@(--self.tweet.retweetCount) stringValue]; //Update cell UI
@@ -65,7 +68,7 @@
         self.retweetLabel.text = [@(++self.tweet.retweetCount) stringValue];
         [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green.png"] forState:UIControlStateNormal];
     }
-    //Send a POST request to the POST favorites/create endpoint
+    //Send a POST request to the POST retweet/create endpoint
     [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
         if(tweet){
             NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
