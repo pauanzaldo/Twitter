@@ -20,11 +20,10 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Tweet Details Page: User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
-- [ ] User can view their profile in a *profile tab*
+- [x] User can view their profile in a *profile tab*
   - Contains the user header view: picture and tagline
   - Contains a section with the users basic stats: # tweets, # following, # followers
-  - [ ] Profile view should include that user's timeline
+  - [x] Profile view should include that user's timeline
 - [x] User should display the relative timestamp for each tweet "8m", "7h"
 - [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count. Refer to [[this guide|unretweeting]] for help on implementing unretweeting.
 - [ ] Links in tweets are clickable.
@@ -51,15 +50,21 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's a walkthrough of implemented user stories (with extensions):
 
-<img src='http://g.recordit.co/ElDO87jivL.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/Fltk35ijhX.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+This app project was definitely the funnest I've built. I found myself running out of time, but I was able to implement fun and challenging extra features. These including detecting the word limit on a Tweet, adding a placeholder, adding relative time to the Tweet, and displying a separate profile view. 
+
+I was not able to give the full profile view completely, but I am glad I learned how to create and configure tap gesture recognizers. 
+ 
+
+In this project I worked on commting more often, with better descriptions of what each commit accomplished, as well as adding sufficient comments to make my code more readable. 
+
 
 ## Credits
 
