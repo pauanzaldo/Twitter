@@ -2,7 +2,7 @@
 
 **Twitter** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **18** hours spent in total
 
 ## User Stories
 
@@ -19,15 +19,10 @@ The following **required** functionality is completed:
 - [x] Using AutoLayout, the Tweet cell should adjust it's layout for iPhone 7, Plus and SE device sizes as well as accommodate device rotation.
 
 The following **optional** features are implemented:
-
-- [x] User can view their profile in a *profile tab*
-  - Contains the user header view: picture and tagline
-  - Contains a section with the users basic stats: # tweets, # following, # followers
-  - [x] Profile view should include that user's timeline
 - [x] User should display the relative timestamp for each tweet "8m", "7h"
 - [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count. Refer to [[this guide|unretweeting]] for help on implementing unretweeting.
 - [ ] Links in tweets are clickable.
-- [ ] User can tap the profile image in any tweet to see another user's profile
+- [x] User can tap the profile image in any tweet to see another user's profile
   - Contains the user header view: picture and tagline
   - Contains a section with the users basic stats: # tweets, # following, # followers
 - [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
@@ -37,16 +32,6 @@ The following **optional** features are implemented:
 - [ ] User sees embedded images in tweet if available
 - [ ] User can switch between timeline, mentions, or profile view through a tab bar
 - [ ] Profile Page: pulling down the profile page should blur and resize the header image. 
-
-
-The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
-
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1.
-2.
 
 ## Video Walkthrough
 
@@ -61,7 +46,6 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 This app project was definitely the funnest I've built. I found myself running out of time, but I was able to implement fun and challenging extra features. These including detecting the word limit on a Tweet, adding a placeholder, adding relative time to the Tweet, and displying a separate profile view. 
 
 I was not able to give the full profile view completely, but I am glad I learned how to create and configure tap gesture recognizers. 
- 
 
 In this project I worked on commting more often, with better descriptions of what each commit accomplished, as well as adding sufficient comments to make my code more readable. 
 
